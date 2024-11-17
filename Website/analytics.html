@@ -1,0 +1,119 @@
+<!--My first webpage. 
+	Author: Cody Smith
+	Date: 11/1/2024-->
+
+	<!DOCTYPE html>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <title>Movie Analytics</title>
+	  <link rel="stylesheet" type="text/css" href="css/main.css">
+	  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	  <style>
+		div {
+  			width:300px;
+  			margin:auto;
+			}
+	  </style>
+	</head>
+	<body>
+	  <!-- Header Menu -->
+	  <header>
+		<h1>Drama Movies Hub</h1>
+		<nav>
+			<a href="index.html">Home</a>
+			<a href="crud.html">Rate Movies</a>
+			<a href="analytics.html">Movie Analytics</a>
+			<a href="aboutus.html">About Us</a>
+		</nav>
+	  </header>
+	  
+	  <!-- Main Section -->
+	  <main>
+		<h2>Movie Ratings Overview</h2>
+		
+<!-- Pie Chart -->
+<div>
+    <canvas id="movieRatingsChart"></canvas>
+</div>
+
+<script>
+  // Function to fetch and return the count of movies for each rating (0-10) from localStorage
+  function getMovieRatingsCount() {
+    const movies = JSON.parse(localStorage.getItem('movies')) || [];
+    const ratingCounts = Array(11).fill(0); // Initialize counts for ratings 0-10
+
+    // Count the number of movies for each rating
+    movies.forEach(movie => {
+      const rating = parseFloat(movie.rating);
+      if (!isNaN(rating) && rating >= 0 && rating <= 10) {
+        ratingCounts[rating]++;
+      }
+    });
+
+    return ratingCounts;
+  }
+
+  // Function to generate the pie chart
+  function generatePieChart() {
+    const ratingCounts = getMovieRatingsCount(); // Get the rating counts from localStorage
+
+    // Labels for each rating (0-10)
+    const labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
+    // Data for the pie chart
+    const data = {
+      labels: labels, // Adding labels to the data
+      datasets: [
+        {
+          data: ratingCounts, // Use the count of ratings for each rating
+          backgroundColor: [
+            '#B22222', '#8B0000', '#D2691E', '#FF6347', '#FF4500', 
+            '#2E8B57', '#8A2BE2', '#A52A2A', '#800080', '#483D8B', '#006400'
+          ],
+          hoverOffset: 4
+        }
+      ]
+    };
+
+    // Pie chart configuration
+    const config = {
+      type: 'pie',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                const ratingLabel = tooltipItem.label; // Get the label (0-10)
+                const count = tooltipItem.raw; // Get the count of movies for that rating
+                return `Rating ${ratingLabel}: ${count} movie(s)`;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    // Create the pie chart
+    new Chart(document.getElementById('movieRatingsChart'), config);
+  }
+
+  // Generate the pie chart when the page loads
+  window.addEventListener('load', generatePieChart);
+</script>
+</main>
+	
+	
+		<!-- Footer Section -->
+		<footer id="contact">
+			<p>Contact us: codys@usf.edu</p>
+			<p>Follow us on social media!</p>
+		</footer>
+	</body>
+	</html>
+	

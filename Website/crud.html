@@ -1,0 +1,60 @@
+<!--My first webpage. 
+	Author: Cody Smith
+	Date: 11/1/2024-->
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Rate Movies</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
+	<body>
+		<!-- Header Menu -->
+		<header>
+			<h1>Drama Movies Hub</h1>
+			<nav>
+				<a href="index.html">Home</a>
+				<a href="crud.html">Rate Movies</a>
+				<a href="analytics.html">Movie Analytics</a>
+				<a href="aboutus.html">About Us</a>
+			</nav>
+		</header>
+  <!-- Main Section -->
+  <main>
+    <h2>Favorite Movies with Ratings</h2>
+    
+    <!-- Movie Form -->
+    <div class="form-container">
+      <form id="movieForm">
+        <input type="text" id="movie-name" placeholder="Enter movie name" required>
+        <input type="number" id="movie-rating" placeholder="Enter movie rating" min="1" max="10" required>
+        <button type="submit" id="add-movie-btn">Add</button>
+      </form>
+    </div>
+
+    <!-- Movies Table -->
+    <div class="table-container">
+      <table id="moviesTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Movie</th>
+            <th>Rating</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script src="js/main.js"></script>
+  </main>
+	
+		<!-- Footer Section -->
+		<footer id="contact">
+			<p>Contact us: codys@usf.edu</p>
+			<p>Follow us on social media!</p>
+		</footer>
+	</body>
+	</html>
+	
